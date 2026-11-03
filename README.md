@@ -30,6 +30,8 @@ Yes	2,898	49.29%
 
 Numerical summaries were examined for tenure, MonthlyCharges and TotalCharges.
 
+I also checked the ranges of the numerical columns. The values looked reasonable, although I haven’t carried out a separate outlier test.
+
 4. Preprocessing
 
 Twelve features from the original project proposal were selected.
