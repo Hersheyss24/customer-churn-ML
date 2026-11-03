@@ -105,6 +105,7 @@ categorical_features = [
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
 
 # Create preprocessing steps for numerical features
 numerical_pipeline = Pipeline([
@@ -126,6 +127,7 @@ print("\nPreprocessing pipeline created successfully.")
 
 # Train a baseline Dummy Classifier
 from sklearn.dummy import DummyClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 baseline_model = Pipeline([
@@ -148,3 +150,48 @@ print(classification_report(y_test, y_pred, zero_division=0))
 
 print("\nConfusion matrix:")
 print(confusion_matrix(y_test, y_pred))
+
+
+# Train a Decision Tree Classifier
+decision_tree_model = Pipeline([
+    ("preprocessor", preprocessor),
+    DecisionTreeClassifier(random_state=42)
+])
+
+# Train the model using the training data
+decision_tree_model.fit(X_train, y_train)
+
+# Predict churn for the test data
+y_pred_tree = decision_tree_model.predict(X_test)
+
+# Evaluate Decision Tree performance
+print("\n--- Decision Tree Results ---")
+print("Accuracy:", round(accuracy_score(y_test, y_pred_tree), 4))
+
+print("\nClassification report:")
+print(classification_report(y_test, y_pred_tree, zero_division=0))
+
+print("\nConfusion matrix:")
+print(confusion_matrix(y_test, y_pred_tree))
+
+# Train a Logistic Regression model
+logistic_model = Pipeline([
+    ("preprocessor", preprocessor),
+    ("classifier", LogisticRegression(max_iter=1000))
+])
+
+# Train the model using the training data
+logistic_model.fit(X_train, y_train)
+
+# Predict churn for the test data
+y_pred_logistic = logistic_model.predict(X_test)
+
+# Evaluate Logistic Regression performance
+print("\n--- Logistic Regression Results ---")
+print("Accuracy:", round(accuracy_score(y_test, y_pred_logistic), 4))
+
+print("\nClassification report:")
+print(classification_report(y_test, y_pred_logistic, zero_division=0))
+
+print("\nConfusion matrix:")
+print(confusion_matrix(y_test, y_pred_logistic))
