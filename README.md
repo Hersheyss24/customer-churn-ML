@@ -11,6 +11,8 @@ Research Question: Can customer information be used to predict whether a custome
 2. Dataset
 
 I used the Customer Churn Prediction dataset from Kaggle.
+Dataset source:
+https://www.kaggle.com/datasets/rashadrmammadov/customer-churn-dataset
 
 * 5,880 rows and 21 columns.
 * The target column is Churn (Yes/No).
@@ -51,16 +53,20 @@ I used random_state=42 so the split can be reproduced, and stratify=y to keep th
 
 The preprocessing was fitted on the training data to avoid data leakage.
 
-6. Baseline Model
+6. 6. Model Results
 
-I used a DummyClassifier with the most_frequent strategy as my baseline model.
+I used a DummyClassifier as my baseline model. It predicts the most common class, which is No.
 
-Metric	Result
-Accuracy	50.68%
-Recall (No)	1.00
-Recall (Yes)	0.00
+I also implemented a Decision Tree and Logistic Regression to compare their performance.
 
-The model predicted every customer as No. This means it could not identify any customers who actually churned. I will use this result to compare with other models later.
+Model	Accuracy
+DummyClassifier	50.68%
+Decision Tree	48.04%
+Logistic Regression	48.21%
+
+The DummyClassifier predicted No for every customer. The other two models were able to predict both Yes and No, but their accuracy was slightly lower than the baseline.
+
+The results show that the models still need improvement.
 
 7. Installation and Usage
 

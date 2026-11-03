@@ -155,7 +155,7 @@ print(confusion_matrix(y_test, y_pred))
 # Train a Decision Tree Classifier
 decision_tree_model = Pipeline([
     ("preprocessor", preprocessor),
-    DecisionTreeClassifier(random_state=42)
+    ("classifier", DecisionTreeClassifier(random_state=42))
 ])
 
 # Train the model using the training data
