@@ -4,61 +4,63 @@ Customer Churn Prediction
 
 1. Project Overview
 
-This project investigates whether customer information can be used to predict customer churn in a telecommunications company using machine learning.
+For this project, I am looking at whether machine learning can be used to predict if a customer will leave a telecommunications company.
 
-Research Question: Can customer information be used to predict whether a telecommunications customer will churn?
+Research Question: Can customer information be used to predict whether a customer will churn?
 
 2. Dataset
 
-The dataset, Customer Churn Prediction, was obtained from Kaggle.
+I used the Customer Churn Prediction dataset from Kaggle.
 
-* 5,880 records and 21 columns.
-* Target variable: Churn (Yes/No).
-* customerID is excluded as it is an identifier.
+* 5,880 rows and 21 columns.
+* The target column is Churn (Yes/No).
+* customerID was not used because it is only an ID.
 
 3. Data Audit
 
-The initial data audit found:
+I checked the dataset before starting the model.
 
 * Missing values: 0
 * Duplicate rows: 0
-* Variable types: 17 string, 2 integer and 2 float columns.
+* 17 string columns, 2 integer columns and 2 float columns.
+
+Churn distribution:
 
 Churn	Count	Percentage
 No	2,982	50.71%
 Yes	2,898	49.29%
 
-Numerical summaries were examined for tenure, MonthlyCharges and TotalCharges.
-
-I also checked the ranges of the numerical columns. The values looked reasonable, although I haven’t carried out a separate outlier test.
+I also looked at the numerical columns: tenure, MonthlyCharges and TotalCharges. The values looked reasonable, but I did not do a separate outlier test.
 
 4. Preprocessing
 
-Twelve features from the original project proposal were selected.
+I used the 12 features selected in my project proposal.
 
-* StandardScaler was applied to numerical features.
-* OneHotEncoder was applied to categorical features.
-* ColumnTransformer combined both preprocessing steps.
+* StandardScaler for numerical features.
+* OneHotEncoder for categorical features.
+* ColumnTransformer to combine both.
 
 5. Train/Test Split
 
-The dataset was split into:
+I split the data into 80% training data and 20% testing data.
 
-* 80% training data (4,704 records).
-* 20% testing data (1,176 records).
+* Training: 4,704 records.
+* Testing: 1,176 records.
 
-Stratification was used to maintain class proportions, with random_state=42 for reproducibility. The preprocessing pipeline was fitted on training data only to prevent data leakage.
+I used random_state=42 so the split can be reproduced, and stratify=y to keep the churn proportions similar in both sets.
+
+The preprocessing was fitted on the training data to avoid data leakage.
 
 6. Baseline Model
 
-A DummyClassifier using the most_frequent strategy was used as the baseline.
+I used a DummyClassifier with the most_frequent strategy as my baseline model.
 
 Metric	Result
 Accuracy	50.68%
 Recall (No)	1.00
 Recall (Yes)	0.00
 
-The model predicted every customer as No. It therefore failed to identify customers who churned, providing a baseline for comparison with future models.
+The model predicted every customer as No. This means it could not identify any customers who actually churned. I will use this result to compare with other models later.
 
 7. Installation and Usage
 
@@ -67,10 +69,10 @@ Clone the repository:
 git clone https://github.com/Hersheyss24/customer-churn-ML.git
 cd customer-churn-ML
 
-Install dependencies:
+Install the packages:
 
 pip install -r requirements.txt
 
-Run the project:
+Run the Python file:
 
 python3 src/milestone2.py
